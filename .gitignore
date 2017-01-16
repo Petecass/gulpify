@@ -1,6 +1,7 @@
 # compiled assets
 build
-
+app/*.html
+app/css
 
 # Logs
 logs
