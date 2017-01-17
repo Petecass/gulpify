@@ -15,6 +15,7 @@ bower_components
 *.html
 *.css
 dist
+.publish
 
 # Logs
 logs
