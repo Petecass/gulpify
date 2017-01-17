@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "postinstall": "npm install bower -g && bower install",
     "test": "gulp test"
   },
   "keywords": [],
