@@ -14,6 +14,9 @@ const data = require('gulp-data');
 const fs = require('fs');
 const del = require('del');
 const runSequence = require('run-sequence');
+const eslint = require('gulp-eslint');
+const sassLint = require('gulp-sass-lint');
+const KarmaServer = require('karma').Server;
 
 const supportedBrowsers = ['last 2 versions'];
 
@@ -108,3 +111,35 @@ gulp.task('default', (cb) => {
   );
 });
 
+function isFixed(file) {
+  // Has ESLint fixed the file contents?
+  return file.eslint != null && file.eslint.fixed;
+}
+
+gulp.task('lint:js', () => {
+  gulp.src(['app/**/*.js', '!node_modules/**'])
+      // eslint() attaches the lint output to the "eslint" property
+      // of the file object so it can be used by other modules.
+      .pipe(eslint({
+        fix: true
+      }))
+      // eslint.format() outputs the lint results to the console.
+      // Alternatively use eslint.formatEach() (see Docs).
+      .pipe(eslint.format())
+      .pipe(gulpIf(isFixed, gulp.dest('app/js')));
+});
+
+gulp.task('lint:scss', () => {
+  gulp.src(['app/sass/**/*.scss', '!app/sass/**/_sprites.scss'])
+      .pipe(sassLint({
+        configFile: '.sass-lint.yml'
+      }))
+      .pipe(sassLint.format());
+});
+
+gulp.task('test', (done) => {
+  new KarmaServer({
+    configFile: `${process.cwd()}/karma.conf.js`,
+    singleRun: true,
+  }, done).start();
+});
