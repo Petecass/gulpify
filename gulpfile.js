@@ -126,7 +126,7 @@ function isFixed(file) {
 }
 
 gulp.task('lint:js', () => {
-  gulp.src(['app/**/*.js', '!node_modules/**'])
+  gulp.src(['app/**/*.js', '!node_modules/**', '!app/bower_components/**'])
       // eslint() attaches the lint output to the "eslint" property
       // of the file object so it can be used by other modules.
       .pipe(eslint({
