@@ -146,7 +146,7 @@ gulp.task('lint:scss', () => {
       .pipe(sassLint.format());
 });
 
-gulp.task('test', (done) => {
+gulp.task('test', ['lint:scss', 'lint:js'], (done) => {
   new KarmaServer({
     configFile: `${process.cwd()}/karma.conf.js`,
     singleRun: true,
