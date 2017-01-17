@@ -1,3 +1,4 @@
+$('.testing').addClass('whatup');
 
 console.log($);
 
