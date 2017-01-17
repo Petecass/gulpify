@@ -5,9 +5,6 @@
 
 <h1>This is the Index page</h1>
 
-{# blah is an invalid tag, and it should fail #}
-{% blah %}
-
 {% import 'macros/nav-macro.nunjucks' as nav %}
 {{nav.active('home')}}
 
