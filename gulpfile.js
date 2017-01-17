@@ -111,6 +111,15 @@ gulp.task('default', (cb) => {
   );
 });
 
+gulp.task('dev-ci', (cb) => {
+  runSequence(
+    'clean:dev',
+    'sprites',
+    ['sass', 'nunjucks'],
+    cb
+  );
+});
+
 function isFixed(file) {
   // Has ESLint fixed the file contents?
   return file.eslint != null && file.eslint.fixed;
