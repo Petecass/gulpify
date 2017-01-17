@@ -26,18 +26,17 @@ const supportedBrowsers = ['last 2 versions'];
 function customPlumber(errTitle) {
   if (process.env.CI) {
     return plumber({
-      errorHandler: function (err) {
+      errorHandler: (err) => {
         throw Error(gutil.colors.red(err.message));
       }
     });
-  } else {
-    return plumber({
-      errorHandler: notify.onError({
-        title: errTitle || 'Error running Gulp',
-        message: 'Error: <%= error.message %>'
-      })
-    });
   }
+  return plumber({
+    errorHandler: notify.onError({
+      title: errTitle || 'Error running Gulp',
+      message: 'Error: <%= error.message %>'
+    })
+  });
 }
 
 gulp.task('sass', () =>

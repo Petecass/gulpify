@@ -1,7 +1,11 @@
 @import 'utils/colors';
 @import 'layout/testing';
 @import 'susy/sass/susy';
-@import 'sprites';
+@import "sprites";
+
+#id {
+  display: flex;
+}
 
 body {
   align-items: center;
