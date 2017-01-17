@@ -135,7 +135,8 @@ gulp.task('lint:js', () => {
       // eslint.format() outputs the lint results to the console.
       // Alternatively use eslint.formatEach() (see Docs).
       .pipe(eslint.format())
-      .pipe(gulpIf(isFixed, gulp.dest('app/js')));
+      .pipe(gulpIf(isFixed, gulp.dest('app/js')))
+      .pipe(eslint.failAfterError());
 });
 
 gulp.task('lint:scss', () => {
@@ -143,7 +144,8 @@ gulp.task('lint:scss', () => {
       .pipe(sassLint({
         configFile: '.sass-lint.yml'
       }))
-      .pipe(sassLint.format());
+      .pipe(sassLint.format())
+      .pipe(sassLint.failOnError());
 });
 
 gulp.task('test', ['lint:scss', 'lint:js'], (done) => {
