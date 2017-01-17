@@ -113,6 +113,7 @@ gulp.task('default', (cb) => {
   runSequence(
     'clean:dev',
     'sprites',
+    ['lint:js', 'lint:scss'],
     ['sass', 'nunjucks'],
     ['browserSync', 'watch'],
     cb
@@ -123,6 +124,7 @@ gulp.task('dev-ci', (cb) => {
   runSequence(
     'clean:dev',
     'sprites',
+    ['lint:js', 'lint:scss'],
     ['sass', 'nunjucks'],
     cb
   );
