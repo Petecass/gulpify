@@ -23,10 +23,18 @@ const supportedBrowsers = ['last 2 versions'];
 
 
 // Custom Plumber function for catching errors
-function customPlumber() {
-  return plumber({
-    errorHandler: notify.onError('Error: <%= error.message %>')
-  });
+function customPlumber(errTitle) {
+  if (process.env.CI) {
+    return plumber({
+      errorHandler: function (err) {
+        throw Error(err.message);
+      }
+    });
+  } else {
+    return plumber({
+      errorHandler: notify.onError('Error: <%= error.message %>')
+    });
+  }
 }
 
 gulp.task('sass', () =>
