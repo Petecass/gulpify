@@ -17,16 +17,15 @@ const runSequence = require('run-sequence');
 const eslint = require('gulp-eslint');
 const sassLint = require('gulp-sass-lint');
 const KarmaServer = require('karma').Server;
+const gutil = require('gulp-util');
 
 const supportedBrowsers = ['last 2 versions'];
 
 
-function customPlumber(errTitle) {
+// Custom Plumber function for catching errors
+function customPlumber() {
   return plumber({
-    errorHandler: notify.onError({
-      title: errTitle || 'Error running Gulp',
-      message: 'Error: <%= error.message %>'
-    })
+    errorHandler: notify.onError('Error: <%= error.message %>')
   });
 }
 
@@ -91,7 +90,8 @@ gulp.task('clean:dev', () =>
 );
 
 gulp.task('watch', () => {
-  gulp.watch('app/sass/**/*.scss', [sass]);
+  gulp.watch('app/sass/**/*.scss', ['sass', 'lint:scss']);
+  gulp.watch('app/js/**/*.js', ['lint:js']);
   gulp.watch('app/js/**/*.js', browserSync.reload());
   gulp.watch('app/*.html', browserSync.reload());
   gulp.watch([
@@ -126,11 +126,13 @@ function isFixed(file) {
 }
 
 gulp.task('lint:js', () => {
-  gulp.src(['app/**/*.js', '!node_modules/**', '!app/bower_components/**'])
+  gulp.src(['app/js/**/*.js'])
       // eslint() attaches the lint output to the "eslint" property
       // of the file object so it can be used by other modules.
+      .pipe(customPlumber('JS error'))
       .pipe(eslint({
-        fix: true
+        fix: true,
+        useEslintrc: true
       }))
       // eslint.format() outputs the lint results to the console.
       // Alternatively use eslint.formatEach() (see Docs).
@@ -148,7 +150,7 @@ gulp.task('lint:scss', () => {
       .pipe(sassLint.failOnError());
 });
 
-gulp.task('test', ['lint:scss', 'lint:js'], (done) => {
+gulp.task('test', (done) => {
   new KarmaServer({
     configFile: `${process.cwd()}/karma.conf.js`,
     singleRun: true,
