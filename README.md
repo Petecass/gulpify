@@ -1,5 +1,7 @@
 # Gulpify
 
+[![Build Status](https://travis-ci.org/Petecass/gulpify.svg?branch=master)](https://travis-ci.org/Petecass/gulpify)
+
 This is a starting point for building basic websites using Gulp as a task runner
 
 `npm install` will install all dependencies as well as installing all of bowers dependencies.
