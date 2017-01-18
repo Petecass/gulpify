@@ -1,12 +1,13 @@
+const sourceDir = 'app';
 
 const config = {
   sass: {
-    src: 'app/sass/**/*.scss',
-    dest: 'app/css',
+    src: `${sourceDir}/sass/**/*.scss`,
+    dest: `${sourceDir}/css`,
     options: {
       sass: {
         includePaths: [
-          'app/bower_components',
+          `${sourceDir}/bower_components`,
           'node_modules',
         ],
       },

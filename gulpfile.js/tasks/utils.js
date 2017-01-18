@@ -16,7 +16,7 @@ gulp.task('clear:dev', () =>
   ])
 );
 
-gulp.task('browserSync:dist', () =>
+gulp.task('server:dist', () =>
   browserSync.init({
     server: {
       baseDir: 'dist'

@@ -1,9 +1,6 @@
 {
-  "images": [{
-    "src": "image-one.png",
-    "alt": "Image one alt text"
-  }, {
-    "src": "image-two.png",
-    "alt": "Image two alt text"
-  }]
+  "siteTitle": "Gulpify",
+  "siteDescription": "Skeleton Workflow",
+  "siteEmail": "",
+  "siteUrl": ""
 }

@@ -1,0 +1,24 @@
+
+doctype html
+html(lang="en")
+head
+  meta(charset="utf-8")
+  meta(http-equiv="x-ua-compatible" content="ie=edge")
+
+  title #{siteTitle}
+
+  meta(name="description" content=siteDescription)
+  meta(name="viewport" content="width=device-width, initial-scale=1")
+
+  // build:css css/main.min.css
+  link(rel="stylesheet" href="css/main.css")
+  // endbuild
+
+body
+
+  block content
+
+  // build:js js/main.min.js
+  script(src="bower_components/jquery/dist/jquery.js")
+  script(src="js/main.js")
+  // endbuild

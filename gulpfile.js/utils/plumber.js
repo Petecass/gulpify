@@ -1,19 +1,18 @@
-const gutil = require('gulp-util');
-const notify = require('gulp-notify');
-const plumber = require('gulp-plumber');
+/* eslint-disable comma-dangle, import/no-extraneous-dependencies */
 
+const $ = require('gulp-load-plugins')();
 
 // Custom Plumber function for catching errors
 function customPlumber(errTitle) {
   if (process.env.CI) {
-    return plumber({
+    return $.plumber({
       errorHandler: (err) => {
-        throw Error(gutil.colors.red(err.message));
+        throw Error($.gutil.colors.red(err.message));
       },
     });
   }
-  return plumber({
-    errorHandler: notify.onError({
+  return $.plumber({
+    errorHandler: $.notify.onError({
       title: errTitle || 'Error running Gulp',
       message: 'Error: <%= error.message %>',
     }),
